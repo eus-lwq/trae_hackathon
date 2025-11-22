@@ -1,57 +1,34 @@
-# React + TypeScript + Vite
+# Community-Driven Travel Planner
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Why This Topic
+- Current travel planning tools lack authentic community insight; they are dominated by ads and stale content.
+- Real travelers share timely, on-the-ground updates in community platforms, but that signal is scattered and hard to use.
+- Capturing real-time posts and turning them into actionable trip plans improves relevance, trust, and local discovery.
 
-Currently, two official plugins are available:
+## What's Different
+- Community-based insight gathering from platforms like Xiaohongshu/RED, Reddit, and Nextdoor (real user posts, not ads).
+- Near real-time aggregation and tagging of posts to surface fresh places, tips, and cautions.
+- A planner that converts community signals into routes, day plans, and map overlays tailored to preferences.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Architecture
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```text
+         Community Sources                     Processing                    Delivery                 Experience
+ ┌──────────────────────────┐        ┌──────────────────────────┐      ┌─────────────────────┐      ┌──────────────────────────┐
+ │  RED (Xiaohongshu)       │  --->  │  Ingestion (scrapers/API)│ ---> │  Planner API (TBD)  │ ---> │  React Frontend (SPA)     │
+ │  Reddit                  │        │  NLP + Tagging            │      │  REST/GraphQL         │      │  Map + Cards + Chat Assist │
+ │  Nextdoor               │        │  Geocoding + Dedup        │      │  Caching              │      │  Leaflet map + Zustand     │
+ └──────────────────────────┘        └──────────────────────────┘      └─────────────────────┘      └──────────────────────────┘
+                                                      │
+                                                      ▼
+                                          Trip Plan Generator (routes, days, constraints)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Notes
+- This repository currently implements the frontend SPA and uses mock data for attractions.
+- The backend ingestion and planner API are not yet included; they are planned components.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  extends: [
-    // other configs...
-    // Enable lint rules for React
-    reactX.configs['recommended-typescript'],
-    // Enable lint rules for React DOM
-    reactDom.configs.recommended,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Tech Stack
+- Frontend: React 18, Vite 6, TypeScript, Tailwind CSS, React Router, Leaflet (react-leaflet), Zustand.
+- Backend: Not present in this repo (planned ingestion and planner services).
+- Deployment: Vercel SPA (`vercel.json` rewrites all routes to `index.html`).

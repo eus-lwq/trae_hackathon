@@ -1,5 +1,5 @@
 {
-  "name": "trae_projects",
+  "name": "y",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -40,5 +40,17 @@
     "vite": "^6.3.5",
     "vite-plugin-trae-solo-badge": "^1.0.0",
     "vite-tsconfig-paths": "^5.1.4"
-  }
+  },
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eus-lwq/trae_hackathon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eus-lwq/trae_hackathon/issues"
+  },
+  "homepage": "https://github.com/eus-lwq/trae_hackathon#readme"
 }
